@@ -1,21 +1,53 @@
 # Import
 from graphics import *
+import time
 import threading
 
 # Import Files
 from src.render import startMenu, render
+from src.tick import tick
 
-# Window
+
+
+# Window size
 width, height = 800, 600
 
-# Player
-playerY = height/2
-playerYGoal = height/2
+
+# Game data
+gameData = {
+    "tps": 30,# ticks/second
+    "window": {
+        "title": "python-pong",
+        "width": width,
+        "height": height
+    },
+    "player": {
+        "x": width - 40,
+        "y": height/2,
+
+        "yGoal": height/2,
+        "stepSize": 5
+    },
+    "ball": {
+        "x": width/2,
+        "y": height/2,
+        "step": 5,
+        "angle": 180,
+        "radius": 1,
+        "color": "#ff0000"
+    }
+}
+
+
 
 # Main
 def main():
     # Create window
-    window = GraphWin("python-pong", width, height)
+    window = GraphWin(
+        gameData["window"]["title"],
+        gameData["window"]["width"],
+        gameData["window"]["height"]
+    )
 
     # Start Menu
     startMenu(window, width, height)
@@ -23,17 +55,25 @@ def main():
 
     # Get mouse Y
     def motion(event):
-        playerYGoal = event.y
-        point = Point(300, playerYGoal)
-        point.setFill("Red")
-        point.draw(window)
+        gameData["player"]["yGoal"] = event.y
     window.bind('<Motion>', motion)
 
     # render_thread = threading.Thread(target=render)
     # render_thread.start()
-    
-    render(window)
-    print(window.mouseY)
+
+    while True:
+        thisTick = tick(gameData)
+        
+        point = Point(thisTick["player"]["x"], thisTick["player"]["y"])
+        point.setFill("Red")
+        point.draw(window)
+        
+        time.sleep(1/gameData["tps"])
+
+        point.undraw()
+
+        render(window)
+        gameData["player"]["y"] = thisTick["player"]["y"]
     
     window.getMouse()
     window.close()
