@@ -8,7 +8,7 @@ from src.render import render
 def main():
     render_thread = threading.Thread(target=render)
     render_thread.start()
-    print("oi")
+    print("\noi")
 
 if (__name__ == "__main__"):
     main()
