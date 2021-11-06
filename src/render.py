@@ -29,5 +29,8 @@ Thiago Rios da Silva
     credits.undraw()
 
 
-def render(window):
+def render(window, gameData):
     window.setBackground("#444444")
+    # ball = Circle(Point(300, 300), 5)
+    # ball.setFill("Red")
+    # ball.draw(window)

@@ -1,7 +1,23 @@
 import time
 import sched
 
+# Import Files
+import src.ball as ball
+
 def tick(gameData):
+
+    # Ball
+    ballData = gameData["ball"]
+    if (ballData["y"]-ballData["radius"] <= 0 or ballData["y"]+ballData["radius"] >= gameData["window"]["height"]):
+        ballData["angle"] = ball.reflectBall(ballData["angle"])
+
+    ballData["x"], ballData["y"] = ball.moveBall(
+        ballData["x"],
+        ballData["y"],
+        ballData["angle"],
+        ballData["step"],
+        ballData["element"]
+    )
     
     return {
         "player": {
@@ -11,10 +27,10 @@ def tick(gameData):
             "yGoal": gameData["player"]["yGoal"]
         },
         "ball": {
-            "x": 1,
-            "y": 1,
+            "x": ballData["x"],
+            "y": ballData["y"],
             "step": 5,
-            "angle": 180,
+            "angle": ballData["angle"],
             "radius": 1,
             "color": "#ff0000"
         }

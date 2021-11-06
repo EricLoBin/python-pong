@@ -1,7 +1,7 @@
 # Import
 from graphics import *
 import time
-import threading
+# import threading
 
 # Import Files
 from src.render import startMenu, render
@@ -32,8 +32,8 @@ gameData = {
         "x": width/2,
         "y": height/2,
         "step": 5,
-        "angle": 180,
-        "radius": 1,
+        "angle": 170,
+        "radius": 10,
         "color": "#ff0000"
     }
 }
@@ -61,19 +61,38 @@ def main():
     # render_thread = threading.Thread(target=render)
     # render_thread.start()
 
-    while True:
+    # Create Elements
+
+    # Player
+    point = Point(gameData["player"]["x"], gameData["player"]["y"])
+    point.setFill("Red")
+    point.draw(window)
+
+    # Ball
+    ball = Circle(Point(
+        gameData["ball"]["x"],
+        gameData["ball"]["y"]),
+        gameData["ball"]["radius"])
+    ball.setFill(gameData["ball"]["color"])
+    ball.draw(window)
+
+    gameData["ball"]["element"] = ball
+
+    running = True
+    while running:
         thisTick = tick(gameData)
-        
-        point = Point(thisTick["player"]["x"], thisTick["player"]["y"])
-        point.setFill("Red")
-        point.draw(window)
         
         time.sleep(1/gameData["tps"])
 
-        point.undraw()
+        point.move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
 
-        render(window)
+        render(window, gameData)
         gameData["player"]["y"] = thisTick["player"]["y"]
+        gameData["ball"]["x"] = thisTick["ball"]["x"]
+        gameData["ball"]["y"] = thisTick["ball"]["y"]
+        gameData["ball"]["angle"] = thisTick["ball"]["angle"]
+        
+        # print(window.items)
     
     window.getMouse()
     window.close()
