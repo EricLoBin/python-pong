@@ -29,8 +29,23 @@ Thiago Rios da Silva
     credits.undraw()
 
 
-def render(window, gameData):
+def createElements(window, gameData):
     window.setBackground("#444444")
-    # ball = Circle(Point(300, 300), 5)
-    # ball.setFill("Red")
-    # ball.draw(window)
+
+    # Ball
+    ball = Circle(Point(
+        gameData["ball"]["x"],
+        gameData["ball"]["y"]),
+        gameData["ball"]["radius"])
+    ball.setFill(gameData["ball"]["color"])
+    ball.draw(window)
+
+    # Player
+    player = Point(gameData["player"]["x"], gameData["player"]["y"])
+    player.setFill("Red")
+    player.draw(window)
+
+    return {
+        "ball": ball,
+        "player": player
+    }

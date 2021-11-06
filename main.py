@@ -4,7 +4,7 @@ import time
 # import threading
 
 # Import Files
-from src.render import startMenu, render
+from src.render import startMenu, createElements
 from src.tick import tick
 
 
@@ -62,37 +62,26 @@ def main():
     # render_thread.start()
 
     # Create Elements
+    elements = createElements(window, gameData)
 
-    # Player
-    point = Point(gameData["player"]["x"], gameData["player"]["y"])
-    point.setFill("Red")
-    point.draw(window)
+    gameData["ball"]["element"] = elements["ball"]
 
-    # Ball
-    ball = Circle(Point(
-        gameData["ball"]["x"],
-        gameData["ball"]["y"]),
-        gameData["ball"]["radius"])
-    ball.setFill(gameData["ball"]["color"])
-    ball.draw(window)
-
-    gameData["ball"]["element"] = ball
-
-    running = True
-    while running:
+    
+    while True:
         thisTick = tick(gameData)
         
         time.sleep(1/gameData["tps"])
 
-        point.move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
+        elements["player"].move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
 
-        render(window, gameData)
         gameData["player"]["y"] = thisTick["player"]["y"]
         gameData["ball"]["x"] = thisTick["ball"]["x"]
         gameData["ball"]["y"] = thisTick["ball"]["y"]
         gameData["ball"]["angle"] = thisTick["ball"]["angle"]
         
-        # print(window.items)
+        
+        if (window.isClosed()):
+            break
     
     window.getMouse()
     window.close()
