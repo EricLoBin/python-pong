@@ -1,5 +1,8 @@
 from graphics import *
 
+def settings():
+    settingsWin = GraphWin("Settings", 200, 200)
+    return
 
 def startMenu(window, x, y):
     window.setBackground("#444444")
@@ -13,6 +16,11 @@ def startMenu(window, x, y):
     text.setSize(30)
     text.draw(window)
 
+    settingsBtn = Text(Point(x/2, 30), "Settings")
+    settingsBtn.setFill("#ffffff")
+    settingsBtn.setSize(15)
+    settingsBtn.draw(window)
+
     credits = Text(Point(x/2, (y/2)+90), '''Eric Loges Binsfeld
 Lucca Oliari Peixoto
 Lucca Resende da Costa Paiva
@@ -22,10 +30,16 @@ Thiago Rios da Silva
     credits.setSize(12)
     credits.draw(window)
     
-    window.getMouse()
+    while True:
+        click = window.getMouse()
+        if (20 <= click.getY() <= 50 and (x/2)-50 <= click.getX() <= (x/2)+50):
+            settings()
+        else:
+            break
 
     rectangle.undraw()
     text.undraw()
+    settingsBtn.undraw()
     credits.undraw()
 
 
