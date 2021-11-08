@@ -21,7 +21,8 @@ def startMenu(window, x, y):
     settingsBtn.setSize(15)
     settingsBtn.draw(window)
 
-    credits = Text(Point(x/2, (y/2)+90), '''Eric Loges Binsfeld
+    credits = Text(Point(x/2, (y/2)+90), '''Antonio Pedro de Mattos Vieira Quezado
+Eric Loges Binsfeld
 Lucca Oliari Peixoto
 Lucca Resende da Costa Paiva
 Thiago Rios da Silva
