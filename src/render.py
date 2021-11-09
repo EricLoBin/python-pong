@@ -64,3 +64,10 @@ def createElements(window, gameData):
         "ball": ball,
         "player": player
     }
+
+
+def renderBall(x, y, gameData):
+    ball = Circle(Point(x, y), gameData["ball"]["radius"])
+    ball.setFill(gameData["ball"]["color"])
+    ball.draw(window)
+    return ball

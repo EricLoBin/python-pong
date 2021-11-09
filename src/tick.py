@@ -1,5 +1,3 @@
-import time
-import sched
 
 # Import Files
 import src.ball as ball

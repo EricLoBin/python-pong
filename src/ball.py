@@ -1,4 +1,17 @@
+from random import random
 import math
+
+# Import Files
+from src.render import renderBall
+
+def createBall(gameData):
+    x, y = gameData["window"]["width"]/2, gameData["window"]["height"]/2
+    return {
+        "x": x,
+        "y": y,
+        "angele": int(random.random()*360),
+        "element": renderBall(x, y, gameData)
+    }
 
 def reflectBall(angle):
     newAngle = 0
