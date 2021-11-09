@@ -9,39 +9,38 @@ from src.tick import tick
 
 
 
-# Window size
-width, height = 800, 600
-
-
-# Game data
-gameData = {
-    "tps": 30,# ticks/second
-    "window": {
-        "title": "python-pong",
-        "width": width,
-        "height": height
-    },
-    "player": {
-        "x": width - 40,
-        "y": height/2,
-
-        "yGoal": height/2,
-        "stepSize": 5
-    },
-    "ball": {
-        "x": width/2,
-        "y": height/2,
-        "step": 5,
-        "angle": 170,
-        "radius": 10,
-        "color": "#ff0000"
-    }
-}
-
-
 
 # Main
 def main():
+
+    # Window size
+    width, height = 800, 600
+
+    # Game data
+    gameData = {
+        "tps": 30,# ticks/second
+        "window": {
+            "title": "python-pong",
+            "width": width,
+            "height": height
+        },
+        "player": {
+            "x": width - 40,
+            "y": height/2,
+
+            "yGoal": height/2,
+            "stepSize": 5
+        },
+        "ball": {
+            "x": width/2,
+            "y": height/2,
+            "step": 5,
+            "angle": 170,
+            "radius": 10,
+            "color": "#ff0000"
+        }
+    }
+
     # Create window
     window = GraphWin(
         gameData["window"]["title"],
