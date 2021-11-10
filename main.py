@@ -14,7 +14,7 @@ import src.ball as ball
 def main():
 
     # Window size
-    width, height = 800, 600
+    width, height = 1600, 900
 
     # Game data
     gameData = {
@@ -36,7 +36,7 @@ def main():
             "x": width/2,
             "y": height/2,
             "step": 5,
-            "radius": 10,
+            "radius": 5,
             "color": "#ff0000"
         }
     }
