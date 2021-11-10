@@ -14,7 +14,7 @@ import src.ball as ball
 def main():
 
     # Window size
-    width, height = 1600, 900
+    width, height = 800, 600
 
     # Game data
     gameData = {
