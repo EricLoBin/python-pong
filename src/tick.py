@@ -19,7 +19,12 @@ def tick(gameData):
         )
 
         ballData["balls"][i] = ballElement
-    
+    if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
+        gameData["player"]["lifes"] -= 1
+        ballData["balls"].append(ball.createBall(gameData))
+    elif (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] <= 0):
+        print("gameOver")
+        #TODO Game Over
     
     return {
         "player": {

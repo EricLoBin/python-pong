@@ -28,6 +28,7 @@ def main():
             "x": width - 40,
             "y": height/2,
 
+            "lifes": 3,
             "yGoal": height/2,
             "stepSize": 5
         },
@@ -66,7 +67,7 @@ def main():
     player.setFill("Red")
     player.draw(window)
 
-    gameData["ball"]["balls"].append(ball.createBall(gameData))
+    # gameData["ball"]["balls"].append(ball.createBall(gameData))
     gameData["ball"]["balls"].append(ball.createBall(gameData))
 
 
