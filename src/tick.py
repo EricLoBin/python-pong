@@ -6,16 +6,20 @@ def tick(gameData):
 
     # Ball
     ballData = gameData["ball"]
-    if (ballData["y"]-ballData["radius"] <= 0 or ballData["y"]+ballData["radius"] >= gameData["window"]["height"]):
-        ballData["angle"] = ball.reflectBall(ballData["angle"])
+    for i, ballElement in enumerate(ballData["balls"]):
+        if (ballElement["y"]-ballData["radius"] <= 0 or ballElement["y"]+ballData["radius"] >= gameData["window"]["height"]):
+            ballElement["angle"] = ball.reflectBall(ballElement["angle"])
 
-    ballData["x"], ballData["y"] = ball.moveBall(
-        ballData["x"],
-        ballData["y"],
-        ballData["angle"],
-        ballData["step"],
-        ballData["element"]
-    )
+        ballElement["x"], ballElement["y"] = ball.moveBall(
+            ballElement["x"],
+            ballElement["y"],
+            ballElement["angle"],
+            ballData["step"],
+            ballElement["element"]
+        )
+
+        ballData["balls"][i] = ballElement
+    
     
     return {
         "player": {
@@ -24,12 +28,5 @@ def tick(gameData):
 
             "yGoal": gameData["player"]["yGoal"]
         },
-        "ball": {
-            "x": ballData["x"],
-            "y": ballData["y"],
-            "step": 5,
-            "angle": ballData["angle"],
-            "radius": 1,
-            "color": "#ff0000"
-        }
+        "ball": ballData
     }

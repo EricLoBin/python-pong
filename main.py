@@ -1,12 +1,12 @@
 # Import
 from graphics import *
 import time
-# import threading
+
 
 # Import Files
-from src.render import startMenu, createElements
+from src.render import startMenu
 from src.tick import tick
-
+import src.ball as ball
 
 
 
@@ -32,10 +32,10 @@ def main():
             "stepSize": 5
         },
         "ball": {
+            "balls": [],
             "x": width/2,
             "y": height/2,
             "step": 5,
-            "angle": 170,
             "radius": 10,
             "color": "#ff0000"
         }
@@ -48,36 +48,38 @@ def main():
         gameData["window"]["height"]
     )
 
+    gameData["window"]["element"] = window
+
+
     # Start Menu
     startMenu(window, width, height)
-    
+
 
     # Get mouse Y
     def motion(event):
         gameData["player"]["yGoal"] = event.y
     window.bind('<Motion>', motion)
 
-    # render_thread = threading.Thread(target=render)
-    # render_thread.start()
 
     # Create Elements
-    elements = createElements(window, gameData)
+    player = Point(gameData["player"]["x"], gameData["player"]["y"])
+    player.setFill("Red")
+    player.draw(window)
 
-    gameData["ball"]["element"] = elements["ball"]
+    gameData["ball"]["balls"].append(ball.createBall(gameData))
+    gameData["ball"]["balls"].append(ball.createBall(gameData))
 
-    
+
     while True:
         thisTick = tick(gameData)
         
         time.sleep(1/gameData["tps"])
 
-        elements["player"].move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
-
+        player.move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
         gameData["player"]["y"] = thisTick["player"]["y"]
-        gameData["ball"]["x"] = thisTick["ball"]["x"]
-        gameData["ball"]["y"] = thisTick["ball"]["y"]
-        gameData["ball"]["angle"] = thisTick["ball"]["angle"]
-        
+
+
+        gameData["ball"] = thisTick["ball"]
         
         if (window.isClosed()):
             break

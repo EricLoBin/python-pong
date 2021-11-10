@@ -6,10 +6,15 @@ from src.render import renderBall
 
 def createBall(gameData):
     x, y = gameData["window"]["width"]/2, gameData["window"]["height"]/2
+    while True:
+        angle = int(random()*360)
+        if (10 < angle < 170 or 190 < angle < 350):
+            break
+
     return {
         "x": x,
         "y": y,
-        "angele": int(random.random()*360),
+        "angle": angle,
         "element": renderBall(x, y, gameData)
     }
 
