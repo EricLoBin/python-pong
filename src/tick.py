@@ -19,6 +19,12 @@ def tick(gameData):
         )
 
         ballData["balls"][i] = ballElement
+
+        if (ballElement["x"]< 0 - ballData["radius"] or ballElement["x"] > gameData["window"]["width"] + ballData["radius"]):
+            ballElement["element"].undraw()
+            ballData["balls"].pop(i)
+        
+
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
         ballData["balls"].append(ball.createBall(gameData))
@@ -35,3 +41,4 @@ def tick(gameData):
         },
         "ball": ballData
     }
+
