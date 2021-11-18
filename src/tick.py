@@ -34,7 +34,10 @@ def tick(gameData):
         #TODO Game Over
     
     #Powerup
-    powerup.trySpawn(gameData)
+    powerupData = gameData["powerup"]
+    pUp = powerup.trySpawn(gameData)
+    if (pUp):
+        powerupData["elements"].append(pUp)
     
     return {
         "player": {
