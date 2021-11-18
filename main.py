@@ -24,6 +24,7 @@ def main():
             "width": width,
             "height": height
         },
+        "score": 0,
         "player": {
             "x": width - 40,
             "y": height/2,
@@ -46,7 +47,7 @@ def main():
             "elements": [],
             "size": 8,
             "max": 2
-        }
+        } 
     }
 
     # Create window

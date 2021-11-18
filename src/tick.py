@@ -30,7 +30,8 @@ def tick(gameData):
         if (ballElement["x"] - ballData["radius"] <= gameData["player"]["x"] - (gameData["player"]["width"]/2) <= ballElement["x"] + ballData["radius"]):
             if (gameData["player"]["y"] - (gameData["player"]["height"]/2) <= ballElement["y"] <= gameData["player"]["y"] + (gameData["player"]["height"]/2)):
                 ballElement["angle"] = randrange(190, 350)
-
+                gameData["score"] += 1
+                print(gameData["score"])
 
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
@@ -41,6 +42,9 @@ def tick(gameData):
     
     #Powerup
     powerupData = gameData["powerup"]
+    if (gameData["score"] % 5 == 0 and gameData["score"] != 0):
+        powerupData["max"] += 1
+    
     pUp = powerup.trySpawn(gameData)
     if (pUp):
         powerupData["elements"].append(pUp)
