@@ -1,6 +1,7 @@
 
 # Import Files
 import src.ball as ball
+import src.powerup as powerup
 
 def tick(gameData):
 
@@ -31,6 +32,9 @@ def tick(gameData):
     elif (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] <= 0):
         print("gameOver")
         #TODO Game Over
+    
+    #Powerup
+    powerup.trySpawn(gameData)
     
     return {
         "player": {

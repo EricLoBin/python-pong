@@ -1,4 +1,5 @@
 from graphics import *
+import random 
 
 def settings():
     settingsWin = GraphWin("Settings", 200, 200)
@@ -62,3 +63,9 @@ def renderBall(x, y, gameData):
     ball.setFill(gameData["ball"]["color"])
     ball.draw(gameData["window"]["element"])
     return ball
+
+def renderPowerup(x, y, gameData):
+    powUp = Rectangle(Point(x, y), Point(x + gameData["powerup"]["size"], y + gameData["powerup"]["size"]))
+    powUp.setFill(color_rgb(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
+    powUp.draw(gameData["window"]["element"])
+    return powUp

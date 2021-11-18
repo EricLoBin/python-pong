@@ -37,8 +37,13 @@ def main():
             "x": width/2,
             "y": height/2,
             "step": 5,
-            "radius": 5,
+            "radius": 7,
             "color": "#ff0000"
+        },
+        "powerup": {
+            "elements": [],
+            "size": 8,
+            "max": 2
         }
     }
 
