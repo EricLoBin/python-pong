@@ -22,6 +22,11 @@ def tick(gameData):
 
         ballData["balls"][i] = ballElement
 
+        if (gameData["gamemode"] == "normal" and ("twoSides" not in gameData["powerup"]["active"])):
+            if (ballElement["x"] - ballData["radius"] < 0):
+                ballElement["x"] = ballData["radius"]
+                ballElement["angle"] = randrange(20, 160)
+
         if (ballElement["x"]< 0 - ballData["radius"] or ballElement["x"] > gameData["window"]["width"] + ballData["radius"]):
             ballElement["element"].undraw()
             ballData["balls"].pop(i)

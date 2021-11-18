@@ -24,6 +24,7 @@ def main():
             "width": width,
             "height": height
         },
+        "gamemode": "normal",
         "score": 0,
         "player": {
             "x": width - 40,
@@ -46,7 +47,10 @@ def main():
         "powerup": {
             "elements": [],
             "size": 8,
-            "max": 2
+            "max": 2,
+            "marginX": 70,
+            "marginY": 25,
+            "active": []
         } 
     }
 
