@@ -4,7 +4,7 @@ import time
 
 
 # Import Files
-from src.render import startMenu
+from src.render import startMenu, renderPlayer
 from src.tick import tick
 import src.ball as ball
 
@@ -27,6 +27,8 @@ def main():
         "player": {
             "x": width - 40,
             "y": height/2,
+            "width": 10,
+            "height": 40,
 
             "lifes": 3,
             "yGoal": height/2,
@@ -68,9 +70,11 @@ def main():
 
 
     # Create Elements
-    player = Point(gameData["player"]["x"], gameData["player"]["y"])
-    player.setFill("Red")
-    player.draw(window)
+    player = renderPlayer(
+        gameData["player"]["x"],
+        gameData["player"]["y"],
+        gameData)
+
 
     # gameData["ball"]["balls"].append(ball.createBall(gameData))
     gameData["ball"]["balls"].append(ball.createBall(gameData))
