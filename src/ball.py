@@ -8,7 +8,7 @@ def createBall(gameData):
     x, y = gameData["window"]["width"]/2, gameData["window"]["height"]/2
     while True:
         angle = int(random()*360)
-        if (10 < angle < 170 or 190 < angle < 350):
+        if (15 < angle < 165 or 195 < angle < 345):
             break
 
     return {
