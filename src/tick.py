@@ -3,8 +3,12 @@ from random import randrange
 # Import Files
 import src.ball as ball
 import src.powerup as powerup
+from src.player import movePlayer
 
 def tick(gameData):
+
+    # Player
+    gameData["player"]["y"] = movePlayer(gameData)
 
     # Ball
     ballData = gameData["ball"]
@@ -59,7 +63,7 @@ def tick(gameData):
     return {
         "player": {
             "x": gameData["player"]["x"],
-            "y": (gameData["player"]["y"] + gameData["player"]["stepSize"] if (gameData["player"]["yGoal"] > gameData["player"]["y"]) else gameData["player"]["y"] - gameData["player"]["stepSize"]) if ((gameData["player"]["yGoal"] - gameData["player"]["y"]) > gameData["player"]["stepSize"] or (gameData["player"]["y"] - gameData["player"]["yGoal"]) > gameData["player"]["stepSize"]) else gameData["player"]["y"],
+#            "y": (gameData["player"]["y"] + gameData["player"]["stepSize"] if (gameData["player"]["yGoal"] > gameData["player"]["y"]) else gameData["player"]["y"] - gameData["player"]["stepSize"]) if ((gameData["player"]["yGoal"] - gameData["player"]["y"]) > gameData["player"]["stepSize"] or (gameData["player"]["y"] - gameData["player"]["yGoal"]) > gameData["player"]["stepSize"]) else gameData["player"]["y"],
 
             "yGoal": gameData["player"]["yGoal"]
         },

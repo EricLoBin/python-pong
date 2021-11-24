@@ -7,7 +7,7 @@ import time
 from src.render import startMenu, renderPlayer, status
 from src.tick import tick
 import src.ball as ball
-from src.player import movePlayer
+
 import src.powerup
 
 # Main
@@ -18,7 +18,7 @@ def main():
 
     # Game data
     gameData = {
-        "tps": 30,# ticks/second
+        "tps": 60,# ticks/second
         "window": {
             "title": "python-pong",
             "width": width,
@@ -34,7 +34,7 @@ def main():
 
             "lifes": 3,
             "yGoal": height/2,
-            "stepSize": 5
+            "stepSize": 4
         },
         "ball": {
             "balls": [],
@@ -77,7 +77,7 @@ def main():
     # Create Elements
     gameData["textlife"], gameData["textscore"] = status(gameData)
 
-    player = renderPlayer(
+    gameData["player"]["element"] = renderPlayer(
         gameData["player"]["x"],
         gameData["player"]["y"],
         gameData)
@@ -88,15 +88,12 @@ def main():
 
 
     while True:
+        time.sleep(1/gameData["tps"])
+
         thisTick = tick(gameData)
         
         print(src.powerup.randomPowerup(gameData))
         
-        time.sleep(1/gameData["tps"])
-
-        movePlayer(gameData, thisTick, player)
-        gameData["player"]["y"] = thisTick["player"]["y"]
-
 
         gameData["ball"] = thisTick["ball"]
         
