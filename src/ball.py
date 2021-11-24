@@ -29,8 +29,8 @@ def reflectBall(angle):
 def moveBall(x, y, angle, step, ball):
     radians = 0.01745329 * (angle - 90) # PI/180 * angle
     newPosition = [
-        step*math.cos(radians),
-        step*math.sin(radians)
+        int(step*math.cos(radians)),
+        int(step*math.sin(radians))
     ]
 
     ball.move(

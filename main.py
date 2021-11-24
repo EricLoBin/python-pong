@@ -40,7 +40,7 @@ def main():
             "balls": [],
             "x": width/2,
             "y": height/2,
-            "step": 5,
+            "step": 4,
             "radius": 7,
             "color": "#ff0000"
         },
@@ -92,8 +92,7 @@ def main():
 
         thisTick = tick(gameData)
         
-        print(src.powerup.randomPowerup(gameData))
-        
+        # print(src.powerup.randomPowerup(gameData))
 
         gameData["ball"] = thisTick["ball"]
         

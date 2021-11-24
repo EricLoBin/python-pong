@@ -39,6 +39,7 @@ def tick(gameData):
         if (ballElement["x"] - ballData["radius"] <= gameData["player"]["x"] - (gameData["player"]["width"]/2) <= ballElement["x"] + ballData["radius"]):
             if (gameData["player"]["y"] - (gameData["player"]["height"]/2) <= ballElement["y"] <= gameData["player"]["y"] + (gameData["player"]["height"]/2)):
                 ballElement["angle"] = randrange(190, 350)
+                ballElement["x"] = ballElement["element"].getCenter().x # Sync ball
                 gameData["score"] += 1
                 gameData["textscore"].setText(f"Score: {gameData['score']}")
 
