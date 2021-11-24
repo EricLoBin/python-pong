@@ -21,7 +21,7 @@ powerups = {
 
 def trySpawn(gameData):
     if len(gameData["powerup"]["elements"]) < gameData["powerup"]["max"]:
-        if random.random() < 0.002:
+        if random.random() < gameData["powerup"]["spawnChance"]:
             x = random.randrange(gameData["powerup"]["marginX"], (gameData["window"]["width"] - gameData["powerup"]["marginX"]))
             y = random.randrange(gameData["powerup"]["marginY"], (gameData["window"]["height"] - gameData["powerup"]["marginY"]))
             element = renderPowerup(x, y, gameData) 
@@ -31,8 +31,10 @@ def trySpawn(gameData):
 
 def randomPowerup(gameData):
     probBad = 1.2 ** gameData["score"] - 1
+    result = None
     if (probBad > random.randrange(0, 100)):
-        return powerups["bad"][random.randrange(0, len(powerups["bad"])- 1)]
+        result = powerups["bad"][random.randrange(0, len(powerups["bad"])- 1)]
     else:
-        return powerups["good"][random.randrange(0, len(powerups["good"])- 1)] 
-        
+        result = powerups["good"][random.randrange(0, len(powerups["good"])- 1)]
+    gameData["powerup"]["active"][result] = gameData["powerup"]["duration"]
+    return result

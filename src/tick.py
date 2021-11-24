@@ -6,6 +6,7 @@ import src.powerup as powerup
 from src.player import movePlayer
 
 def tick(gameData):
+    powerupData = gameData["powerup"]
 
     # Player
     gameData["player"]["y"] = movePlayer(gameData)
@@ -23,8 +24,6 @@ def tick(gameData):
             ballData["step"],
             ballElement["element"]
         )
-
-        ballData["balls"][i] = ballElement
 
         # Left wall collision
         if (gameData["gamemode"] == "normal" and ("twoSides" not in gameData["powerup"]["active"])):
@@ -50,11 +49,30 @@ def tick(gameData):
                     gameData["powerup"]["max"] += 2
         
         # powerupCollision
-        # distance =  (((x2 - x1) ** 2) + (y2 - y1)** 2)** 0.5
-        # ballElement["x"] 
-        # ballElement["y"]
-        # for gameData["powerup"]["elements"]:
-        
+        ballXInitialPoint = ballElement["x"] - ballData["radius"]
+        ballXEndPoint = ballElement["x"] + ballData["radius"]
+        for i, p in enumerate(gameData["powerup"]["elements"]):
+            powerupXInitialPoint = p.p1.x
+            powerupXEndPoint = p.p2.x
+            if (
+                (powerupXInitialPoint < ballXInitialPoint < powerupXEndPoint) or
+                (powerupXInitialPoint < ballXEndPoint < powerupXEndPoint)
+                ):
+                powerupYInitialPoint = p.p1.y
+                powerupYEndPoint = p.p2.y
+                ballYInitialPoint = ballElement["y"] - ballData["radius"]
+                ballYEndPoint = ballElement["y"] + ballData["radius"]
+                if (
+                    (powerupYInitialPoint < ballYInitialPoint < powerupYEndPoint) or
+                    (powerupYInitialPoint < ballYEndPoint < powerupYEndPoint)
+                    ):
+                    powerup.randomPowerup(gameData)
+                    # print(gameData["powerup"]["active"])
+                    p.undraw()
+                    gameData["powerup"]["elements"].pop(i)
+                    break
+
+
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
         gameData["textlife"].setText(f"Vidas restantes: {gameData['player']['lifes']}")
@@ -64,8 +82,6 @@ def tick(gameData):
         #TODO Game Over
     
     #Powerup
-    powerupData = gameData["powerup"]
-    
     pUp = powerup.trySpawn(gameData)
     if (pUp):
         powerupData["elements"].append(pUp)

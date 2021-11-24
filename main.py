@@ -48,6 +48,8 @@ def game():
             "elements": [],
             "size": 20,
             "max": 2,
+            "spawnChance": 0.002, # 1 = 100%
+            "duration": 600, #Ticks
             "marginX": 70,
             "marginY": 35,
             "active": {}
