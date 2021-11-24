@@ -12,7 +12,9 @@ import src.powerup
 
 # Main
 def main():
+    game()
 
+def game():
     # Window size
     width, height = 800, 600
 
@@ -46,7 +48,7 @@ def main():
         },
         "powerup": {
             "elements": [],
-            "size": 8,
+            "size": 16,
             "max": 2,
             "marginX": 70,
             "marginY": 25,
@@ -95,7 +97,8 @@ def main():
         # print(src.powerup.randomPowerup(gameData))
 
         gameData["ball"] = thisTick["ball"]
-        
+
+
         if (window.isClosed()):
             break
     

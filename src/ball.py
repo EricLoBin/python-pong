@@ -22,8 +22,10 @@ def reflectBall(angle):
     newAngle = 0
     if (angle < 180):
         return (180 - angle)
-    else:
+    elif (angle > 180):
         return (540 - angle)
+    else:
+        return 320
 
 
 def moveBall(x, y, angle, step, ball):

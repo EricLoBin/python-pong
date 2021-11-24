@@ -39,11 +39,23 @@ Thiago Rios da Silva
         else:
             break
 
-
     rectangle.undraw()
     text.undraw()
     settingsBtn.undraw()
     credits.undraw()
+
+
+# Pause
+def pause(window, x, y):
+    text = Text(Point(x, y), "PAUSE")
+    text.setFill("#ffffff")
+    text.setSize(15)
+    text.draw(window)
+
+    window.getMouse()
+
+    text.undraw()
+
 
 # Player
 def renderPlayer(x, y, gameData):

@@ -26,11 +26,13 @@ def tick(gameData):
 
         ballData["balls"][i] = ballElement
 
+        # Left wall collision
         if (gameData["gamemode"] == "normal" and ("twoSides" not in gameData["powerup"]["active"])):
             if (ballElement["x"] - ballData["radius"] < 0):
                 ballElement["x"] = ballData["radius"]
-                ballElement["angle"] = randrange(20, 160)
+                ballElement["angle"] = randrange(30, 150)
 
+        # Delete ball
         if (ballElement["x"]< 0 - ballData["radius"] or ballElement["x"] > gameData["window"]["width"] + ballData["radius"]):
             ballElement["element"].undraw()
             ballData["balls"].pop(i)
@@ -38,7 +40,7 @@ def tick(gameData):
         #playerCollision
         if (ballElement["x"] - ballData["radius"] <= gameData["player"]["x"] - (gameData["player"]["width"]/2) <= ballElement["x"] + ballData["radius"]):
             if (gameData["player"]["y"] - (gameData["player"]["height"]/2) <= ballElement["y"] <= gameData["player"]["y"] + (gameData["player"]["height"]/2)):
-                ballElement["angle"] = randrange(190, 350)
+                ballElement["angle"] = randrange(210, 330)
                 ballElement["x"] = ballElement["element"].getCenter().x # Sync ball
                 gameData["score"] += 1
                 gameData["textscore"].setText(f"Score: {gameData['score']}")
