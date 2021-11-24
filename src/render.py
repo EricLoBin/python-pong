@@ -51,9 +51,14 @@ def pause(window, x, y):
     text.setFill("#ffffff")
     text.setSize(15)
     text.draw(window)
+    resume = Text(Point(x, y + 30), "CLIQUE NA TELA PARA CONTINUAR")
+    resume.setFill("#f0f0f0")
+    resume.setSize(10)
+    resume.draw(window)
 
     window.getMouse()
 
+    resume.undraw()
     text.undraw()
 
 

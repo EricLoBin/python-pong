@@ -51,7 +51,7 @@ def game():
             "size": 16,
             "max": 2,
             "marginX": 70,
-            "marginY": 25,
+            "marginY": 35,
             "active": {}
         } 
     }
