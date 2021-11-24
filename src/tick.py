@@ -45,6 +45,10 @@ def tick(gameData):
                 gameData["score"] += 1
                 gameData["textscore"].setText(f"Score: {gameData['score']}")
 
+                # powerupAmmount
+                if (gameData["score"] % 5 == 0):
+                    gameData["powerup"]["max"] += 2
+
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
         gameData["textlife"].setText(f"Vidas restantes: {gameData['player']['lifes']}")
@@ -55,8 +59,6 @@ def tick(gameData):
     
     #Powerup
     powerupData = gameData["powerup"]
-    if (gameData["score"] % 5 == 0 and gameData["score"] != 0):
-        powerupData["max"] += 1
     
     pUp = powerup.trySpawn(gameData)
     if (pUp):

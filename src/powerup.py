@@ -21,7 +21,7 @@ powerups = {
 
 def trySpawn(gameData):
     if len(gameData["powerup"]["elements"]) < gameData["powerup"]["max"]:
-        if random.random() < 0.025:
+        if random.random() < 0.002:
             x = random.randrange(gameData["powerup"]["marginX"], (gameData["window"]["width"] - gameData["powerup"]["marginX"]))
             y = random.randrange(gameData["powerup"]["marginY"], (gameData["window"]["height"] - gameData["powerup"]["marginY"]))
             element = renderPowerup(x, y, gameData) 

@@ -48,7 +48,7 @@ def game():
         },
         "powerup": {
             "elements": [],
-            "size": 16,
+            "size": 20,
             "max": 2,
             "marginX": 70,
             "marginY": 35,
