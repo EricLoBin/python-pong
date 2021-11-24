@@ -4,7 +4,7 @@ import time
 
 
 # Import Files
-from src.render import startMenu, renderPlayer, status
+from src.render import startMenu, renderPlayer, status, gameOver
 from src.tick import tick
 import src.ball as ball
 
@@ -92,18 +92,18 @@ def game():
     while True:
         time.sleep(1/gameData["tps"])
 
-        thisTick = tick(gameData)
-        
+        end = tick(gameData)
+
         # print(src.powerup.randomPowerup(gameData))
 
-        gameData["ball"] = thisTick["ball"]
-
-
-        if (window.isClosed()):
+        if (window.isClosed() or end):
             break
-    
+    # GameOver
+    gameOver(window, gameData["window"]["element"])
     window.getMouse()
     window.close()
+    #
+    game()
 
 if (__name__ == "__main__"):
     main()

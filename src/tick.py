@@ -54,7 +54,7 @@ def tick(gameData):
         gameData["textlife"].setText(f"Vidas restantes: {gameData['player']['lifes']}")
         ballData["balls"].append(ball.createBall(gameData))
     elif (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] <= 0):
-        print("gameOver")
+        return True
         #TODO Game Over
     
     #Powerup
@@ -65,14 +65,4 @@ def tick(gameData):
         powerupData["elements"].append(pUp)
 
     
-    return {
-        "player": {
-            "x": gameData["player"]["x"],
-#            "y": (gameData["player"]["y"] + gameData["player"]["stepSize"] if (gameData["player"]["yGoal"] > gameData["player"]["y"]) else gameData["player"]["y"] - gameData["player"]["stepSize"]) if ((gameData["player"]["yGoal"] - gameData["player"]["y"]) > gameData["player"]["stepSize"] or (gameData["player"]["y"] - gameData["player"]["yGoal"]) > gameData["player"]["stepSize"]) else gameData["player"]["y"],
-
-            "yGoal": gameData["player"]["yGoal"]
-        },
-        "ball": ballData
-    }
-
-
+    return False

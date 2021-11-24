@@ -13,14 +13,15 @@ def readLeaderboard():
         open("data/leaderboard.csv", "x")
         return []
 
-def updateLeaderboard(newScore):
+def updateLeaderboard(name, score):
+    insert = f"{((10 - len(name)) * ' ')}{name}: {score}"
     leaderboard = readLeaderboard()
 
     if (len(leaderboard) == 0 or leaderboard[0] == ""):
-        leaderboard = [newScore]
+        leaderboard = [insert]
     else:
-        leaderboard.append(newScore)
-        leaderboard.sort(key = lambda x: int(x[6:]), reverse=True)
+        leaderboard.append(insert)
+        leaderboard.sort(key = lambda x: int(x[12:]), reverse=True)
     
     writeLeaderboard(leaderboard)
     return [] #TODO

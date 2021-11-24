@@ -1,5 +1,5 @@
 from graphics import *
-import random 
+import random
 
 def settings():
     settingsWin = GraphWin("Settings", 200, 200)
@@ -61,6 +61,12 @@ def pause(window, x, y):
     resume.undraw()
     text.undraw()
 
+# Game Over
+def gameOver(window, gamemode):
+    for item in window.items:
+        item.undraw()
+    for item in window.items:
+        item.undraw()
 
 # Player
 def renderPlayer(x, y, gameData):
