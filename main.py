@@ -1,6 +1,7 @@
 # Import
 from graphics import *
 import time
+import src.powerup
 
 
 # Import Files
@@ -50,7 +51,7 @@ def main():
             "max": 2,
             "marginX": 70,
             "marginY": 25,
-            "active": []
+            "active": {}
         } 
     }
 
@@ -87,6 +88,8 @@ def main():
 
     while True:
         thisTick = tick(gameData)
+        
+        print(src.powerup.randomPowerup(gameData))
         
         time.sleep(1/gameData["tps"])
 

@@ -29,3 +29,10 @@ def trySpawn(gameData):
             #TODO return elemento completo
             return element
 
+def randomPowerup(gameData):
+    probBad = 1.2 ** gameData["score"] - 1
+    if (probBad > random.randrange(0, 100)):
+        return powerups["bad"][random.randrange(0, len(powerups["bad"])- 1)]
+    else:
+        return powerups["good"][random.randrange(0, len(powerups["good"])- 1)] 
+        
