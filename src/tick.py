@@ -54,11 +54,12 @@ def tick(gameData):
     pUp = powerup.trySpawn(gameData)
     if (pUp):
         powerupData["elements"].append(pUp)
+
     
     return {
         "player": {
             "x": gameData["player"]["x"],
-            "y": gameData["player"]["y"] + gameData["player"]["stepSize"] if (gameData["player"]["yGoal"] > gameData["player"]["y"]) else gameData["player"]["y"] - gameData["player"]["stepSize"],
+            "y": (gameData["player"]["y"] + gameData["player"]["stepSize"] if (gameData["player"]["yGoal"] > gameData["player"]["y"]) else gameData["player"]["y"] - gameData["player"]["stepSize"]) if ((gameData["player"]["yGoal"] - gameData["player"]["y"]) > gameData["player"]["stepSize"] or (gameData["player"]["y"] - gameData["player"]["yGoal"]) > gameData["player"]["stepSize"]) else gameData["player"]["y"],
 
             "yGoal": gameData["player"]["yGoal"]
         },
