@@ -8,8 +8,6 @@ from src.render import startMenu, renderPlayer, status, gameOver
 from src.tick import tick
 import src.ball as ball
 
-import src.powerup
-
 # Main
 def main():
     game()

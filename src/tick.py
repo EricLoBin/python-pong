@@ -48,7 +48,13 @@ def tick(gameData):
                 # powerupAmmount
                 if (gameData["score"] % 5 == 0):
                     gameData["powerup"]["max"] += 2
-
+        
+        # powerupCollision
+        # distance =  (((x2 - x1) ** 2) + (y2 - y1)** 2)** 0.5
+        # ballElement["x"] 
+        # ballElement["y"]
+        # for gameData["powerup"]["elements"]:
+        
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
         gameData["textlife"].setText(f"Vidas restantes: {gameData['player']['lifes']}")
