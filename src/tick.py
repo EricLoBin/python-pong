@@ -36,10 +36,11 @@ def tick(gameData):
             if (gameData["player"]["y"] - (gameData["player"]["height"]/2) <= ballElement["y"] <= gameData["player"]["y"] + (gameData["player"]["height"]/2)):
                 ballElement["angle"] = randrange(190, 350)
                 gameData["score"] += 1
-                print(gameData["score"])
+                gameData["textscore"].setText(f"Score: {gameData['score']}")
 
     if (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] > 0):
         gameData["player"]["lifes"] -= 1
+        gameData["textlife"].setText(f"Vidas restantes: {gameData['player']['lifes']}")
         ballData["balls"].append(ball.createBall(gameData))
     elif (len(ballData["balls"]) == 0 and gameData["player"]["lifes"] <= 0):
         print("gameOver")

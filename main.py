@@ -5,7 +5,7 @@ import src.powerup
 
 
 # Import Files
-from src.render import startMenu, renderPlayer
+from src.render import startMenu, renderPlayer, status
 from src.tick import tick
 import src.ball as ball
 
@@ -76,6 +76,8 @@ def main():
 
 
     # Create Elements
+    gameData["textlife"], gameData["textscore"] = status(gameData)
+
     player = renderPlayer(
         gameData["player"]["x"],
         gameData["player"]["y"],

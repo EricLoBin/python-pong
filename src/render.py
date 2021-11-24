@@ -66,3 +66,12 @@ def renderPowerup(x, y, gameData):
     powUp.setFill(color_rgb(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
     powUp.draw(gameData["window"]["element"])
     return powUp
+
+def status(gameData):
+    textlife = Text(Point(gameData["window"]["width"]/2, 15),f"Vidas restantes: {gameData['player']['lifes']}")
+    textlife.setFill('#ffffff')
+    textlife.draw(gameData["window"]["element"])
+    textscore = Text(Point(gameData["window"]["width"]/ 2, 35), f"Score: {gameData['score']}")
+    textscore.setFill('#ffffff')
+    textscore.draw(gameData["window"]["element"])
+    return textlife, textscore
