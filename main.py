@@ -1,15 +1,14 @@
 # Import
 from graphics import *
 import time
-import src.powerup
 
 
 # Import Files
 from src.render import startMenu, renderPlayer, status
 from src.tick import tick
 import src.ball as ball
-
-
+from src.player import movePlayer
+import src.powerup
 
 # Main
 def main():
@@ -95,7 +94,7 @@ def main():
         
         time.sleep(1/gameData["tps"])
 
-        player.move(thisTick["player"]["x"]-gameData["player"]["x"], thisTick["player"]["y"]-gameData["player"]["y"])
+        movePlayer(gameData, thisTick, player)
         gameData["player"]["y"] = thisTick["player"]["y"]
 
 
