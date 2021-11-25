@@ -99,9 +99,7 @@ def game():
         if (window.isClosed() or end):
             break
     # GameOver
-    gameOver(window, gameData["window"]["element"])
-    window.getMouse()
-    window.close()
+    gameOver(gameData)
     #
     game()
 

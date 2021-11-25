@@ -62,11 +62,31 @@ def pause(window, x, y):
     text.undraw()
 
 # Game Over
-def gameOver(window, gamemode):
+def gameOver(gameData):
+    window = gameData["window"]["element"]
+    width, height = gameData["window"]["width"], gameData["window"]["height"]
     for item in window.items:
         item.undraw()
-    for item in window.items:
-        item.undraw()
+    
+    bg = Rectangle(Point(0, 0), Point(width, height))
+    bg.setFill("#444444")
+    bg.draw(window)
+
+    # text = Text(Point(width/2, (height/2) - 20))
+    # text.score
+
+    input_box = Entry(Point(width/2, height/2), 20)
+    input_box.setSize(20)
+    input_box.draw(window)
+
+    while True:
+        input_box.setText(input_box.getText()[:10].upper())
+        key = gameData["window"]["element"].checkKey()
+        if (key == "Return"):
+            break
+    nickname = input_box.getText()
+    #TODO
+    window.close()
 
 # Player
 def renderPlayer(x, y, gameData):
