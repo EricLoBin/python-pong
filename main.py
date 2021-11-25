@@ -18,7 +18,7 @@ def game():
 
     # Game data
     gameData = {
-        "tps": 60,# ticks/second
+        "tps": 120,# ticks/second
         "window": {
             "title": "python-pong",
             "width": width,

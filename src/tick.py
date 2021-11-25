@@ -82,6 +82,15 @@ def tick(gameData):
         #TODO Game Over
     
     #Powerup
+    ppup = None
+    for pwup in powerupData["active"]:
+        powerupData["active"][pwup] -= 1
+        if powerupData["active"][pwup] == 0:
+            ppup = pwup
+    if ppup:
+        del powerupData["active"][ppup]
+        
+            
     pUp = powerup.trySpawn(gameData)
     if (pUp):
         powerupData["elements"].append(pUp)
