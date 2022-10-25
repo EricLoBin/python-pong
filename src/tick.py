@@ -8,7 +8,9 @@ def tick(gameData):
     powerupData = gameData["powerup"]
 
     # Player
+    # gameData["player"]["y"] = gameData["player"]["element"].move(gameData)
     gameData["player"]["y"] = movePlayer(gameData)
+    
 
     # Ball
     for ball in gameData["ball"]["balls"]:

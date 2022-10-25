@@ -52,7 +52,6 @@ class Game:
                 "cooldown": 0
             }
         }
-
 # Main
 def main():
     game()
@@ -118,6 +117,7 @@ def game():
     # Get mouse Y
     def motion(event):
         gameData["player"]["yGoal"] = event.y
+        gameData["player"]["element"].y_goal = event.y
     window.bind('<Motion>', motion)
 
 
@@ -129,6 +129,7 @@ def game():
         height/2,
         10,
         40,
+        gameData["player"]["stepSize"],
         "#ff0000",
         gameData["window"]["element"]
     )
