@@ -4,10 +4,54 @@ import time
 
 
 # Import Files
-from src.render import startMenu, renderPlayer, status, gameOver
+from src.render import startMenu, status, gameOver
 from src.tick import tick
-import src.ball as ball
+from src.ball import Ball
+from src.player import Player
 
+
+class Game:
+    def __init__(self):
+        # Window
+        self.windowWidth = 800
+        self.windowHeight = 600
+        self.window = GraphWin("Pong", self.windowWidth, self.windowHeight)
+        self.window.setBackground("black")
+        self.window.setCoords(0, 0, self.windowWidth, self.windowHeight)
+
+        # Player
+        # self.playerX = 10
+        # self.playerY = self.windowHeight/2
+        # self.playerYGoal = self.playerY
+        # self.playerStepSize = 10
+        # self.playerWidth = 10
+        # self.playerHeight = 100
+
+        # Ball
+        self.balls = []
+
+        self.gameData = {
+            "window": {
+                "element": self.window,
+                "width": 800,
+                "height": 600
+            },
+            "player": None,
+            "ball": {
+                "x": 400,
+                "y": 300,
+                "radius": 10,
+                "color": "white",
+                "step": 5,
+                "angle": 0,
+                "element": None
+            },
+            "gamemode": "normal",
+            "powerup": {
+                "active": [],
+                "cooldown": 0
+            }
+        }
 
 # Main
 def main():
@@ -80,14 +124,18 @@ def game():
     # Create Elements
     gameData["textlife"], gameData["textscore"] = status(gameData)
 
-    gameData["player"]["element"] = renderPlayer(
-        gameData["player"]["x"],
-        gameData["player"]["y"],
-        gameData)
+    gameData["player"]["element"] = Player(
+        width - 40,
+        height/2,
+        10,
+        40,
+        "#ff0000",
+        gameData["window"]["element"]
+    )
 
 
     # gameData["ball"]["balls"].append(ball.createBall(gameData))
-    gameData["ball"]["balls"].append(ball.Ball(gameData))
+    gameData["ball"]["balls"].append(Ball(gameData))
 
 
     while True:

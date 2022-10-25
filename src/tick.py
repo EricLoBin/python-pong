@@ -1,7 +1,6 @@
 from random import randrange
 
 # Import Files
-import src.ball as ball
 import src.powerup as powerup
 from src.player import movePlayer
 

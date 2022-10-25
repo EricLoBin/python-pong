@@ -22,8 +22,7 @@ def startMenu(window, x, y):
     settingsBtn.setSize(15)
     settingsBtn.draw(window)
 
-    credits = Text(Point(x/2, (y/2)+90), '''Antonio Pedro de Mattos Vieira Quezado
-Eric Loges Binsfeld
+    credits = Text(Point(x/2, (y/2)+90), '''Eric Loges Binsfeld
 Lucca Oliari Peixoto
 Lucca Resende da Costa Paiva
 Thiago Rios da Silva
@@ -98,11 +97,11 @@ def renderPlayer(x, y, gameData):
     player.draw(gameData["window"]["element"])
     return player
 
-def renderBall(x, y, gameData):
-    ball = Circle(Point(x, y), gameData["ball"]["radius"])
-    ball.setFill(gameData["ball"]["color"])
-    ball.draw(gameData["window"]["element"])
-    return ball
+# def renderBall(x, y, gameData):
+#     ball = Circle(Point(x, y), gameData["ball"]["radius"])
+#     ball.setFill(gameData["ball"]["color"])
+#     ball.draw(gameData["window"]["element"])
+#     return ball
 
 def renderPowerup(x, y, gameData):
     powUp = Rectangle(Point(x, y), Point(x + gameData["powerup"]["size"], y + gameData["powerup"]["size"]))
