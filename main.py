@@ -8,6 +8,7 @@ from src.render import startMenu, renderPlayer, status, gameOver
 from src.tick import tick
 import src.ball as ball
 
+
 # Main
 def main():
     game()
@@ -86,7 +87,7 @@ def game():
 
 
     # gameData["ball"]["balls"].append(ball.createBall(gameData))
-    gameData["ball"]["balls"].append(ball.createBall(gameData))
+    gameData["ball"]["balls"].append(ball.Ball(gameData))
 
 
     while True:
