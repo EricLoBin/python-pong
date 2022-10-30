@@ -1,40 +1,61 @@
-import random
+from graphics import Rectangle, Point
+from random import randint
 
-from src.render import renderPowerup
+from src.ball import Ball
 
-powerups = {
-    "good": [
-        "moreBalls",    # mais bolas
-        "bigBalls",     # bolas grandes
-        "bigPlayer",    # barra grande
-        "slowBall",     # bola lenta
-        "extraLife",    # vida extra
-        "doublePoints"  # dobro de pontos
-    ],
-    "bad": [
-        "smallBalls",   # bolas pequenas
-        "twoSides",     # player (barra) dos dois lados
-        "smallPlayer",  # barra pequena    
-        "fastBall",     # bola rápida
-    ]
-}
+# Powerup effects
+def more_balls(game):
+    game.balls.append(Ball(game.window))
 
-def trySpawn(gameData):
-    if len(gameData["powerup"]["elements"]) < gameData["powerup"]["max"]:
-        if random.random() < gameData["powerup"]["spawnChance"]:
-            x = random.randrange(gameData["powerup"]["marginX"], (gameData["window"]["width"] - gameData["powerup"]["marginX"]))
-            y = random.randrange(gameData["powerup"]["marginY"], (gameData["window"]["height"] - gameData["powerup"]["marginY"]))
-            element = renderPowerup(x, y, gameData) 
+def bigger_balls(game):
+    for ball in game.balls:
+        if (ball.radius > 14):
+            continue
+        ball.resize(ball.radius + 3)
 
-            #TODO return elemento completo
-            return element
+def smaller_balls(game):
+    for ball in game.balls:
+        if (ball.radius < 5):
+            continue
+        ball.resize(ball.radius - 3)
 
-def randomPowerup(gameData):
-    probBad = 1.2 ** gameData["score"] - 1
-    result = None
-    if (probBad > random.randrange(0, 100)):
-        result = powerups["bad"][random.randrange(0, len(powerups["bad"])- 1)]
-    else:
-        result = powerups["good"][random.randrange(0, len(powerups["good"])- 1)]
-    gameData["powerup"]["active"][result] = gameData["powerup"]["duration"]
-    return result
+def slower_balls(game):
+    for ball in game.balls:
+        if (ball.step < 3):
+            continue
+        ball.step -= 1
+
+def faster_balls(game):
+    for ball in game.balls:
+        if (ball.step > 4):
+            continue
+        ball.step += 1
+
+powerup_list = [
+    more_balls,
+    bigger_balls,
+    smaller_balls,
+    slower_balls,
+    faster_balls
+]
+
+powerup_list_size = len(powerup_list)-1
+
+# Powerup class
+class Powerup:
+    def __init__(self, game, x, y):
+        self.x = x
+        self.y = y
+        self.size = 20
+        self.powerup = Rectangle(
+            Point(x, y),
+            Point((x + self.size), (y + self.size))
+        )
+        color = "#%06x" % randint(0, 0xFFFFFF) # random color
+        self.powerup.setFill(color)
+        self.powerup.draw(game.window.window)
+
+    def activate_powerup(self, game):
+        powerup_list[randint(0, powerup_list_size)](game)
+        self.powerup.undraw()
+        game.powerups.remove(self)

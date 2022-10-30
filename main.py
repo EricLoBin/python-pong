@@ -1,157 +1,63 @@
-# Import
-from graphics import *
 import time
+from random import randint
 
-
-# Import Files
-from src.render import startMenu, status, gameOver
-from src.tick import tick
-from src.ball import Ball
+from src.window import Window
 from src.player import Player
+from src.ball import Ball
+from src.powerup import Powerup
 
 
 class Game:
     def __init__(self):
+        # Options
+        self.tps = 80
+        self.max_lives = 3
+
+        # Game data
+        self.score = 0
+        self.lives = self.max_lives
+        self.balls = []
+        self.max_powerups = 2
+        self.powerups = []
+
         # Window
-        self.windowWidth = 800
-        self.windowHeight = 600
-        self.window = GraphWin("Pong", self.windowWidth, self.windowHeight)
-        self.window.setBackground("black")
-        self.window.setCoords(0, 0, self.windowWidth, self.windowHeight)
+        self.window = Window(self)
+        self.window.start_menu()
 
         # Player
-        # self.playerX = 10
-        # self.playerY = self.windowHeight/2
-        # self.playerYGoal = self.playerY
-        # self.playerStepSize = 10
-        # self.playerWidth = 10
-        # self.playerHeight = 100
+        self.player = Player(self.window.window)
 
-        # Ball
-        self.balls = []
+    def tick(self):
+        self.player.tick()
+        for ball in self.balls:
+            ball.tick(self)
+        # powerup spawn
+        if (len(self.powerups) < self.max_powerups):
+            self.powerups.append(Powerup(self, randint(30, self.window.width - 60), randint(30, self.window.height - 30)))
 
-        self.gameData = {
-            "window": {
-                "element": self.window,
-                "width": 800,
-                "height": 600
-            },
-            "player": None,
-            "ball": {
-                "x": 400,
-                "y": 300,
-                "radius": 10,
-                "color": "white",
-                "step": 5,
-                "angle": 0,
-                "element": None
-            },
-            "gamemode": "normal",
-            "powerup": {
-                "active": [],
-                "cooldown": 0
-            }
-        }
-# Main
+
 def main():
-    game()
+    game = Game()
 
-def game():
-    # Window size
-    width, height = 800, 600
+    # Ball
+    game.balls.append(Ball(game.window))
 
-    # Game data
-    gameData = {
-        "tps": 120,# ticks/second
-        "window": {
-            "title": "python-pong",
-            "width": width,
-            "height": height
-        },
-        "gamemode": "normal",
-        "score": 0,
-        "player": {
-            "x": width - 40,
-            "y": height/2,
-            "width": 10,
-            "height": 40,
-
-            "lifes": 3,
-            "yGoal": height/2,
-            "stepSize": 4
-        },
-        "ball": {
-            "balls": [],
-            "x": width/2,
-            "y": height/2,
-            "step": 4,
-            "radius": 7,
-            "color": "#ff0000"
-        },
-        "powerup": {
-            "elements": [],
-            "size": 20,
-            "max": 2,
-            "spawnChance": 0.002, # 1 = 100%
-            "duration": 600, #Ticks
-            "marginX": 70,
-            "marginY": 35,
-            "active": {}
-        } 
-    }
-
-    # Create window
-    window = GraphWin(
-        gameData["window"]["title"],
-        gameData["window"]["width"],
-        gameData["window"]["height"]
-    )
-
-    gameData["window"]["element"] = window
-
-
-    # Start Menu
-    startMenu(window, width, height)
-
-
-    # Get mouse Y
-    def motion(event):
-        gameData["player"]["yGoal"] = event.y
-        gameData["player"]["element"].y_goal = event.y
-    window.bind('<Motion>', motion)
-
-
-    # Create Elements
-    gameData["textlife"], gameData["textscore"] = status(gameData)
-
-    gameData["player"]["element"] = Player(
-        width - 40,
-        height/2,
-        10,
-        40,
-        gameData["player"]["stepSize"],
-        "#ff0000",
-        gameData["window"]["element"]
-    )
-
-
-    # gameData["ball"]["balls"].append(ball.createBall(gameData))
-    gameData["ball"]["balls"].append(Ball(gameData))
-
-
+    tps_wait_time = 1/game.tps
     while True:
-        time.sleep(1/gameData["tps"])
+        start = time.time() # Tick Start time
 
-        end = tick(gameData)
+        # Tick
+        game.tick()
 
-        # print(src.powerup.randomPowerup(gameData))
-
-        if (window.isClosed() or end):
+        # Window is closed
+        if (game.window.window.isClosed()):
             break
-    # GameOver
-    gameOver(gameData)
-    #
-    game()
+
+        # TPS
+        wait = (tps_wait_time - (time.time() - start))
+        if (wait > 0):
+            time.sleep(wait)
+
 
 if (__name__ == "__main__"):
     main()
