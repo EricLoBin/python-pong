@@ -59,12 +59,9 @@ class Ball:
 
         self.__move()
 
-        # Left wall collision
-        # if (gameData["gamemode"] == "normal" and ("twoSides" not in gameData["powerup"]["active"])):
-        if (True):
-            if (self.x - self.radius < 0):
-                self.x = self.radius
-                self.angle = randrange(30, 150)
+        if (self.x - self.radius < 0):
+            self.x = self.radius
+            self.angle = randrange(30, 150)
         
         # Delete ball
         if (self.x < 0 - self.radius or self.x > self.window.getWidth() + self.radius):
